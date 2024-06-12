@@ -1,18 +1,18 @@
-from fastapi import FastAPI, APIRouter, Form
+from fastapi import FastAPI, APIRouter, Form, HTTPException
 
 #from .views import user_router, assets_router
 from pathlib import Path
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi import Request
-from typing import List
+
 
 from .schemas import (
    UserCreateInput, StandardOutput, 
-   ErrorOutput, UserFavoriteAdd, UserListOutput
+   ErrorOutput, 
    )
 from .services import UserService, FavoriteService
 
@@ -38,45 +38,49 @@ app.mount("/static", static, name="static")
 #app.include_router(user_router)
 #app.include_router(assets_router)
 
-# USERS
-@app.get('/', response_class=HTMLResponse, include_in_schema=False)
-def home(request: Request):
-    return templates.TemplateResponse(request=request, name="index.html")
-
+#HOME
 @app.get("/home", response_class=HTMLResponse, include_in_schema=False)
 async def render_home(request: Request):
    return templates.TemplateResponse(request=request, name="index.html")
 
-@app.get("/create", response_class=HTMLResponse, include_in_schema=False)
-async def render_home(request: Request):
-   return templates.TemplateResponse(request=request, name="cadastro.html")
+#USERS
+@app.get("/cadastro", response_class=HTMLResponse, include_in_schema=False)
+async def render_create(request: Request):
+   users = await UserService.list_user()
+   return templates.TemplateResponse("cadastro.html", {"request": request, "users": users})
 
 @app.get("/ativos", response_class=HTMLResponse, include_in_schema=False)
-async def render_home(request: Request):
-   return templates.TemplateResponse(request=request, name="ativos.html")
+async def render_ativos(request: Request):
+   users = await UserService.list_user()
+   return templates.TemplateResponse("ativos.html", {"request": request, "users": users})
+
+@app.get("/list", response_class=HTMLResponse, include_in_schema=False)
+async def render_users(request: Request):
+   users = await UserService.list_user()
+   return templates.TemplateResponse("listagem.html", {"request": request, "users": users})
 
 @app.post('/create', description='Adds a new user to the database', response_model=StandardOutput, responses={400:{'model': ErrorOutput}})
 async def user_create(name:str = Form(...)):
     try:
        user_item = UserCreateInput(name=name)
        await UserService.create_user(name=user_item.name)
-       return StandardOutput(message='Ok')
+       return RedirectResponse(url='/cadastro', status_code=303)
     except Exception as e:
        raise HTTPException(400, detail=str(e))
 
-@app.delete('/delete/{user_id}', description='deletes a user from the database', response_model=StandardOutput, responses={400:{'model': ErrorOutput}})
-async def user_delete(user_id):
+@app.delete('/delete', description='Deletes a user from the database', response_model=StandardOutput, responses={400:{'model': ErrorOutput}})
+async def user_delete(user_id: int = Form(...)):
     try:
        await UserService.delete_user(user_id)
-       return StandardOutput(message='Ok')
+       return RedirectResponse(url='/cadastro', status_code=303)
     except Exception as e:
        raise HTTPException(400, detail=str(e))
     
-@app.post('/favorite/add', description='Adds a favorite to the user', response_model=StandardOutput, responses={400:{'model': ErrorOutput}})
-async def user_favorite_add(favorite_add: UserFavoriteAdd):
+@app.post('/favorite/add', description='Adds a favorite to the user', response_class=RedirectResponse, responses={400:{'model': ErrorOutput}})
+async def user_favorite_add(user_id: int = Form(...), symbol: str = Form(...)):
     try:
-       await FavoriteService.add_favorite(user_id=favorite_add.user_id, symbol=favorite_add.symbol)
-       return StandardOutput(message='Ok')
+       await FavoriteService.add_favorite(user_id=user_id, symbol=symbol)
+       return RedirectResponse(url="/ativos", status_code=303)
     except Exception as e:
        raise HTTPException(400, detail=str(e))
 
@@ -84,13 +88,14 @@ async def user_favorite_add(favorite_add: UserFavoriteAdd):
 async def user_favorite_remove(user_id:int, symbol: str):
     try:
        await FavoriteService.remove_favorite(user_id=user_id, symbol=symbol)
-       return StandardOutput(message='Ok')
+       return RedirectResponse(url="/ativos", status_code=303)
     except Exception as e:
        raise HTTPException(400, detail=str(e))  
       
-@app.get('/list', description='List Users from the database', response_model=List[UserListOutput], responses={400:{'model': ErrorOutput}})
-async def user_list():
-    try:
-       return await UserService.list_user()
-    except Exception as e:
-       raise HTTPException(400, detail=str(e))    
+# @app.get('/list', description='List Users from the database', response_model=List[UserListOutput], responses={400:{'model': ErrorOutput}})
+# async def user_list():
+#     try:
+#        return await UserService.list_user()
+#     except Exception as e:
+#        raise HTTPException(400, detail=str(e))    
+    

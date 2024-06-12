@@ -13,7 +13,7 @@
             <nav>
                 <ul>
                     <li><a href="/home">Início</a></li>
-                    <li><a href="/create">Cadastrar Usuário</a></li>
+                    <li><a href="/cadastro">Cadastrar Usuário</a></li>
                     <li><a href="/ativos">Gerenciar Ativos</a></li>
                     <li><a href="/list">Listar Usuários</a></li>
                 </ul>
@@ -26,11 +26,14 @@
             <section id="favorite-assets">
                 <h2>Ativos Favoritos</h2>
                 <div class="form-container">
-                    <form id="add-asset-form">
-                        <select id="user-select">
+                    <form id="add-asset-form" method="post" action="/favorite/add">
+                        <select id="user_id" name="user_id">
                             <option value="">Selecione o Usuário</option>
+                            {% for user in users %}
+                                <option value="{{ user.id }}">{{ user.name }}</option>
+                            {% endfor %}
                         </select>
-                        <input type="text" id="asset" placeholder="Ticker do Ativo" required>
+                        <input type="text" class="form-control" id="symbol" placeholder="Ticker do Ativo" name="symbol" required>
                         <button type="submit">Adicionar Ativo</button>
                     </form>
                     <form id="remove-asset-form">

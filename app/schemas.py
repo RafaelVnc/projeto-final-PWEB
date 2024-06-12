@@ -6,11 +6,6 @@ class UserCreateInput(BaseModel):
     name: str
 
 
-class UserFavoriteAdd(BaseModel):
-    user_id: int
-    symbol: str
-
-
 class StandardOutput(BaseModel):
     message: str
 
@@ -27,6 +22,9 @@ class Favorite(BaseModel):
     #class Config:
     #    orm_mode = True
 
+class UserListDelete(BaseModel):
+    id: int
+    name: str
 
 class UserListOutput(BaseModel):
     id: int

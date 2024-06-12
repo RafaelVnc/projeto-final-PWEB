@@ -25,7 +25,7 @@ async def render_home(request: Request):
    return templates.TemplateResponse(request=request, name="templates/index.html")
 
 @user_router.get("/create", response_class=HTMLResponse, include_in_schema=False)
-async def render_home(request: Request):
+async def render_cadastro(request: Request):
    return templates.TemplateResponse(request=request, name="cadastro.html")
 
 @user_router.get("/ativos", response_class=HTMLResponse, include_in_schema=False)

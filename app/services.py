@@ -1,3 +1,4 @@
+from typing import List
 from sqlalchemy.ext.asyncio.session import async_session
 from sqlalchemy.future import select
 from sqlalchemy import delete
@@ -17,7 +18,7 @@ class UserService:
             await session.execute(delete(User).where(User.id==int(user_id)))
             await session.commit()
     
-    async def list_user():
+    async def list_user() -> List[User]:
         async with async_session() as session:
             result = await session.execute(select(User))
             return result.scalars().all() 
