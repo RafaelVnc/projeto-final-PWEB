@@ -1,0 +1,139 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #daa520;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    opacity: 0.9;
+}
+
+.container h2 {
+    text-align: center;
+    margin-top: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+    color: #daa520; 
+    font-size: 2em; 
+   
+}
+  
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #daa520;
+}
+
+header {
+    background-color: #191970;
+    color: #daa520;
+    padding: 10px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: #daa520;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    padding: 20px 0;
+}
+
+.intro-text {
+    background-color: #191970;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.1em;
+    line-height: 1.0;
+    color: #daa520;
+    margin-top: 20px;
+    text-align: justify;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('../img/money.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+section {
+    background-color: #191970;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #daa520;
+}
+
+h2 {
+    background-color: #191970;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 1.1em;
+    line-height: 1.0;
+    color: #daa520;
+    margin-top: 20px;
+    text-align: justify;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+form {
+    flex: 1;
+    min-width: 250px;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #191970;
+    color: #daa520
+}
+
+footer {
+    background-color: #191970;
+    color: #daa520;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -24,8 +24,8 @@ class Favorite(BaseModel):
     symbol: str
     user_id: int
     #Casting database obj to json
-    class Config:
-        orm_mode = True
+    #class Config:
+    #    orm_mode = True
 
 
 class UserListOutput(BaseModel):
@@ -33,5 +33,5 @@ class UserListOutput(BaseModel):
     name: str
     favorites: List[Favorite]
     #Casting database obj to json
-    class Config:
-        orm_mode = True
+    #class Config:
+    #    orm_mode = True

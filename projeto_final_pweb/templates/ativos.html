@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carteira de Ativos - Gerenciamento de Ativos</title>
+    <link rel="stylesheet" type="text/css" href={{url_for('static', path='styles.css')}}>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Carteira de Ativos</h1>
+            <nav>
+                <ul>
+                    <li><a href="/home">Início</a></li>
+                    <li><a href="/create">Cadastrar Usuário</a></li>
+                    <li><a href="/ativos">Gerenciar Ativos</a></li>
+                    <li><a href="/list">Listar Usuários</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="favorite-assets">
+                <h2>Ativos Favoritos</h2>
+                <div class="form-container">
+                    <form id="add-asset-form">
+                        <select id="user-select">
+                            <option value="">Selecione o Usuário</option>
+                        </select>
+                        <input type="text" id="asset" placeholder="Ticker do Ativo" required>
+                        <button type="submit">Adicionar Ativo</button>
+                    </form>
+                    <form id="remove-asset-form">
+                        <select id="user-select-remove">
+                            <option value="">Selecione o Usuário</option>
+                        </select>
+                        <select id="asset-remove">
+                            <option value="">Selecione o Ativo</option>
+                        </select>
+                        <button type="submit">Remover Ativo</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Carteira de Ações. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
