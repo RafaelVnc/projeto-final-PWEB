@@ -33,3 +33,4 @@ class UserListOutput(BaseModel):
     #Casting database obj to json
     #class Config:
     #    orm_mode = True
+    
