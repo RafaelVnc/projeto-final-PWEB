@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carteira de Ativos - Gerenciamento de Ativos</title>
     <link rel="stylesheet" type="text/css" href={{url_for('static', path='styles.css')}}>
+    <link rel="shortcut icon" href={{url_for('static', path='favicon/favicon.png')}} type="image/x-icon">
 </head>
-<body>
+<body style="background-image: url(../static/img/money.png);">
     <header>
         <div class="container">
             <h1>Carteira de Ativos</h1>
@@ -36,12 +37,18 @@
                         <input type="text" class="form-control" id="symbol" placeholder="Ticker do Ativo" name="symbol" required>
                         <button type="submit">Adicionar Ativo</button>
                     </form>
-                    <form id="remove-asset-form">
-                        <select id="user-select-remove">
+                    <form id="remove-asset-form" method="post" action="/favorite/remove">
+                        <select id="user_id" name="user_id">
                             <option value="">Selecione o Usuário</option>
+                            {% for user in users %}
+                                <option value="{{ user.id }}">{{ user.name }}</option>
+                            {% endfor %}
                         </select>
-                        <select id="asset-remove">
+                        <select id="fav_id" name="fav_id">
                             <option value="">Selecione o Ativo</option>
+                            {% for ativo in ativos %}
+                                <option value="{{ ativo.id }}">{{ ativo.symbol }}</option>
+                            {% endfor %}
                         </select>
                         <button type="submit">Remover Ativo</button>
                     </form>

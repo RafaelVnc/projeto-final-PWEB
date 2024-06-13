@@ -10,7 +10,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name= Column(String)
 
-    favorites = relationship('Favorite', backref='user', lazy='subquery')
+    favorites = relationship('Favorite', backref='user', lazy='subquery', cascade="all, delete-orphan")
 
 
 class Favorite(Base):
@@ -18,4 +18,4 @@ class Favorite(Base):
    
     id = Column(Integer, primary_key=True, autoincrement=True)
     symbol = Column(String)
-    user_id = Column(Integer, ForeignKey('user.id'))
+    user_id = Column(Integer, ForeignKey('user.id', ondelete="CASCADE"))
