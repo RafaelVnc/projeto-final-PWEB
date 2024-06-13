@@ -2,7 +2,7 @@
 name = "projeto-final-pweb"
 version = "0.1.0"
 description = ""
-authors = ["Rafael Venancio <rafael.venancio08.06@gmail.com>"]
+authors = ["Rafael Venancio <rafael.venancio08.06@gmail.com>", Wesley Oliveira <wesley.ricardo@sempreceub.com>]
 readme = "README.md"
 
 [tool.poetry.dependencies]
