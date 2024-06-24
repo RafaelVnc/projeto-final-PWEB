@@ -19,6 +19,7 @@ Projeto final da disciplina de Programação Web do curso de Análise e desenvol
 * Poetry
 
 ## Como rodar
+Adicione o path do projeto na variável PYTHONPATH no arquivo .env.
 
 Inicie banco de dados **postgres** e **pgadmin**
 ```shell

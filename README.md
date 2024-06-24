@@ -19,6 +19,7 @@ Final Web Programming discipline project from the course of Analysis and Systems
 * Poetry
 
 ## How to run
+Add project path at PYTHONPATH variable in .env file.
 
 Start **postgres** database and **pgadmin**
 ```shell
